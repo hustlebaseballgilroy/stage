@@ -1,0 +1,40 @@
+{%- comment -%}
+  Google "Event" structured data for the next tryout. Filled from
+  _data/tryouts.yml and only emitted once a date is set and still upcoming
+  (checked when the site builds), so Google never sees a stale event.
+{%- endcomment -%}
+{%- assign t = site.data.tryouts -%}
+{%- if t.date and t.start -%}
+{%- assign today = site.time | date: "%Y-%m-%d" -%}
+{%- assign tdate = t.date | date: "%Y-%m-%d" -%}
+{%- if tdate >= today -%}
+{%- assign m = t.date | date: "%-m" | plus: 0 -%}
+{%- assign d = t.date | date: "%-d" | plus: 0 -%}
+{%- assign tz = "-08:00" -%}
+{%- if m > 3 and m < 11 -%}{%- assign tz = "-07:00" -%}{%- endif -%}
+{%- if m == 3 and d >= 14 -%}{%- assign tz = "-07:00" -%}{%- endif -%}
+{%- if m == 11 and d < 7 -%}{%- assign tz = "-07:00" -%}{%- endif -%}
+{%- assign img = site.url | append: "/images/og-image.jpg" -%}
+{%- if t.flyer -%}{%- assign img = site.url | append: "/" | append: t.flyer -%}{%- endif -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportsEvent",
+  "name": "Hustle Baseball {{ t.season }} Tryouts ({{ t.divisions | join: ' & ' }})",
+  "description": "Tryouts for Hustle Baseball's {{ t.divisions | join: ' and ' }} youth travel baseball teams in Gilroy, California. Bring a bat, helmet, glove and cleats.",
+  "startDate": "{{ tdate }}T{{ t.start }}:00{{ tz }}",
+  "endDate": "{{ tdate }}T{{ t.end | default: t.start }}:00{{ tz }}",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "image": ["{{ img }}"],
+  "location": {
+    "@type": "Place",
+    "name": {{ t.venue | default: "Gilroy, California" | jsonify }},
+    "address": {{ t.address | default: "Gilroy, CA" | jsonify }}
+  },
+  "organizer": {"@type": "SportsOrganization", "name": "Hustle Baseball", "url": "{{ site.url }}/"},
+  "performer": {"@type": "SportsTeam", "name": "Hustle Baseball"}
+}
+</script>
+{%- endif -%}
+{%- endif -%}

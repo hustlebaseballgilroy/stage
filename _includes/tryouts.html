@@ -1,0 +1,65 @@
+{%- assign t = site.data.tryouts -%}
+{%- assign tba = "To be announced" -%}
+<div class="tryout-block{% unless t.date %} tryout-tba{% endunless %}" data-tryout-date="{{ t.date }}" data-start="{{ t.start }}" data-end="{{ t.end }}"
+     data-season="{{ t.season }}" data-venue="{{ t.venue }}" data-address="{{ t.address }}" data-email="{{ t.email }}"
+     data-equipment="{{ t.equipment | join: ', ' }}" data-divisions="{{ t.divisions | join: ' & ' }}">
+  <p class="past-note"><b>The {{ t.season }} tryouts have ended.</b> Dates for the next season will be posted here and in
+    <a href="/#news">Latest News</a>. You can still <a href="/signup.html#register">register your interest</a> or email
+    <a href="mailto:{{ t.email }}">{{ t.email }}</a> and a coach will follow up.</p>
+  {%- unless t.date %}
+  <p class="tba-note"><b>{{ t.season }} tryout dates are coming soon.</b> <a href="/signup.html#register">Register now</a> and we'll email you the
+    date, time and location as soon as they're set. They'll also be posted here and in <a href="/#news">Latest News</a>.</p>
+  {%- endunless %}
+  <div class="tryout-grid">
+    <div class="tryout-card cham frame">
+      <div class="inner cham">
+        <div class="ages">
+          {%- for d in t.divisions %}
+          <div class="age"><b>{{ d }}</b><span>Division</span></div>
+          {%- endfor %}
+        </div>
+        <div class="info-row">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></div>
+          <div><div class="lbl">Date</div><div class="val">{{ t.date_label | default: tba }}</div></div>
+        </div>
+        <div class="info-row">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+          <div><div class="lbl">Time</div><div class="val">{{ t.time_label | default: tba }}</div></div>
+        </div>
+        <div class="info-row">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.1 7-12A7 7 0 1 0 5 10c0 5.9 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+          <div><div class="lbl">Location</div><div class="val">{{ t.venue | default: tba }}{% if t.address %}<small>{{ t.address }}</small>{% endif %}</div></div>
+        </div>
+        <div class="t-actions">
+          <a class="btn btn-pink btn-sm" href="/signup.html#register">Register Online</a>
+          {%- if t.date %}
+          <a class="btn btn-ghost btn-sm only-upcoming js-ics" href="#" download="hustle-tryouts.ics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>Add to Calendar</a>
+          {%- endif %}
+          {%- if t.maps_url %}
+          <a class="btn btn-ghost btn-sm" href="{{ t.maps_url }}" target="_blank" rel="noopener">Directions</a>
+          {%- endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="side-stack">
+      <div class="equip cham">
+        <h4>Equipment Required</h4>
+        <ul>{% for e in t.equipment %}<li>{{ e }}</li>{% endfor %}</ul>
+      </div>
+      <div class="finder cham">
+        <h4>Which <span class="brush">division?</span></h4>
+        <p class="small">{% for c in t.cutoffs %}<b style="color:var(--{% cycle 'blue', 'pink' %})">{{ c.division }}</b>: born on/after {{ c.label }}{% unless forloop.last %} &nbsp;·&nbsp; {% endunless %}{% endfor %}</p>
+        <label for="dob">Player's birth date</label>
+        <input type="date" id="dob" min="2008-01-01" max="2022-12-31">
+        <div class="f-res" id="fres" aria-live="polite"
+             data-cutoffs='[{% for c in t.cutoffs %}{"d":"{{ c.division }}","on":"{{ c.born_on_or_after }}","label":"{{ c.label }}"}{% unless forloop.last %},{% endunless %}{% endfor %}]'><b>?</b><span>Enter a birth date to check eligibility.</span></div>
+      </div>
+      {%- if t.flyer %}
+      <div class="flyer-shot cham">
+        <img src="/{{ t.flyer }}" alt="Hustle Baseball {{ t.season }} tryouts flyer" loading="lazy">
+      </div>
+      {%- endif %}
+    </div>
+  </div>
+</div>

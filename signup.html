@@ -1,0 +1,194 @@
+---
+layout: default
+title: Join Hustle Baseball - Registration & Tryouts | Youth Travel Baseball in Gilroy
+keywords: "baseball registration gilroy, travel baseball signup, youth baseball registration, gilroy baseball signup, spring 2027 baseball, travel baseball enrollment, baseball tryouts gilroy"
+description: Register for Hustle Baseball's 11U and 12U youth travel baseball teams in Gilroy, California. Tryout dates, age cutoffs, what to bring and the online registration form.
+---
+{%- assign t = site.data.tryouts -%}
+<section class="page-hero">
+  <div class="streak a"></div><div class="streak b"></div><div class="dots"></div>
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Home</a> / Join</p>
+    <h1>Join <span class="brush">Hustle</span></h1>
+    <p class="lede">{{ site.data.registration.season }} registration for our {{ t.divisions | join: " and " }} travel baseball teams. Fill out the form below and our coaching staff will reach out with next steps, including tryout information.</p>
+    <div class="cta-row" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:24px">
+      <a class="btn btn-pink" href="#register">Register Now</a>
+      <a class="btn btn-ghost" href="#tryouts">Tryout Details</a>
+    </div>
+  </div>
+</section>
+
+<section class="band" style="padding-top:clamp(34px,5vw,56px)">
+  <div class="wrap two-col">
+    <div>
+      <div class="sec-head">
+        <p class="eyebrow">Why Hustle</p>
+        <h2 class="sec">What We <span class="brush">Offer</span></h2>
+      </div>
+      <ul class="ticks">
+        <li><b>Experienced coaching:</b> coaches with years of baseball experience and a passion for player development</li>
+        <li><b>Competitive play:</b> local tournament opportunities close to home</li>
+        <li><b>Skill development:</b> fundamentals, advanced techniques and game situations</li>
+        <li><b>Character building:</b> sportsmanship, teamwork, hustle and personal growth</li>
+        <li><b>Community:</b> a supportive environment for players and families</li>
+      </ul>
+    </div>
+    <div class="card cham">
+      <h3>Available teams</h3>
+      <div class="ages" style="margin-bottom:14px">
+        <div class="age"><b>11U</b><span>Fundamentals · teamwork · fun</span></div>
+        <div class="age"><b>12U</b><span>Advanced skills · tournaments</span></div>
+      </div>
+      <p style="color:var(--mist);margin:0">Specific schedules are provided once teams are formed. Not sure which age group fits? Use the division checker below.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="tryouts">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Tryouts</p>
+      <h2 class="sec"><span class="brush">Tryouts</span> {{ t.season }}</h2>
+    </div>
+    {% include tryouts.html %}
+  </div>
+</section>
+
+<section class="band" id="register" style="background:var(--ink-2)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Registration</p>
+      <h2 class="sec">Registration <span class="brush">Form</span></h2>
+      <p class="lede" style="margin-top:14px">Takes about two minutes. Our coaches review every registration and follow up by email.</p>
+    </div>
+    {%- assign r = site.data.registration -%}
+    {%- assign gform = "https://docs.google.com/forms/d/e/" | append: r.form_id -%}
+    <div class="form-shell cham"><div class="inner cham">
+      <!-- Fields map to the Google Form in _data/registration.yml. Keep the two in sync. -->
+      <form class="reg-form" id="regForm" novalidate
+            data-action="{{ gform }}/formResponse"
+            data-dob="{{ r.fields.dob }}" data-heard="{{ r.fields.heard }}" data-division="{{ r.fields.division }}"
+            data-cutoffs='[{% for c in t.cutoffs %}{"d":"{{ c.division }}","on":"{{ c.born_on_or_after }}","label":"{{ c.label }}"}{% unless forloop.last %},{% endunless %}{% endfor %}]'>
+        <div class="rf-head">
+          <span class="rf-tag">{{ r.season }}</span>
+          <h3>Player <span class="brush">Registration</span></h3>
+          <p>Tell us about your player and we'll reach out with tryout details. Fields marked <b class="req">*</b> are required.</p>
+        </div>
+
+        <fieldset>
+          <legend>Parent / Guardian</legend>
+          <div class="rf-grid">
+            <div class="rf-field">
+              <label for="rfParent">Name <b class="req">*</b></label>
+              <input id="rfParent" name="{{ r.fields.parent }}" type="text" autocomplete="name" required>
+            </div>
+            <div class="rf-field">
+              <label for="rfEmail">Email <b class="req">*</b></label>
+              <input id="rfEmail" name="emailAddress" type="email" autocomplete="email" required>
+            </div>
+            <div class="rf-field">
+              <label for="rfPhone">Phone</label>
+              <input id="rfPhone" name="{{ r.fields.phone }}" type="tel" autocomplete="tel">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Player</legend>
+          <div class="rf-grid">
+            <div class="rf-field">
+              <label for="rfPlayer">Player name <b class="req">*</b></label>
+              <input id="rfPlayer" name="{{ r.fields.player }}" type="text" required>
+            </div>
+            <div class="rf-field">
+              <label for="rfDob">Date of birth <b class="req">*</b></label>
+              <input id="rfDob" type="date" required min="2005-01-01" max="2024-12-31">
+              <p class="rf-hint" id="rfDobHint" aria-live="polite"></p>
+            </div>
+          </div>
+
+          <div class="rf-group" role="radiogroup" aria-labelledby="rfDivL" data-required>
+            <span class="rf-label" id="rfDivL">Age group trying out for <b class="req">*</b></span>
+            <div class="rf-pills big">
+              {%- for d in r.divisions %}
+              <label class="pill"><input type="radio" name="{{ r.fields.division }}" value="{{ d }}"><span>{{ d | upcase }}</span></label>
+              {%- endfor %}
+            </div>
+          </div>
+
+          <div class="rf-group" role="radiogroup" aria-labelledby="rfPosPL" data-required>
+            <span class="rf-label" id="rfPosPL">Primary position <b class="req">*</b></span>
+            <div class="rf-pills">
+              {%- for p in r.positions %}
+              <label class="pill"><input type="radio" name="{{ r.fields.pos_primary }}" value="{{ p }}"><span>{{ p }}</span></label>
+              {%- endfor %}
+            </div>
+          </div>
+
+          <div class="rf-group" role="radiogroup" aria-labelledby="rfPosSL" data-required>
+            <span class="rf-label" id="rfPosSL">Secondary position <b class="req">*</b></span>
+            <div class="rf-pills">
+              {%- for p in r.positions %}
+              <label class="pill alt"><input type="radio" name="{{ r.fields.pos_secondary }}" value="{{ p }}"><span>{{ p }}</span></label>
+              {%- endfor %}
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>A little more</legend>
+          <div class="rf-group" role="radiogroup" aria-labelledby="rfHeardL">
+            <span class="rf-label" id="rfHeardL">How did you hear about us?</span>
+            <div class="rf-pills">
+              {%- for h in r.heard_options %}
+              <label class="pill"><input type="radio" name="{{ r.fields.heard }}" value="{{ h }}"><span>{{ h }}</span></label>
+              {%- endfor %}
+              <label class="pill"><input type="radio" name="{{ r.fields.heard }}" value="__other_option__"><span>Other</span></label>
+            </div>
+            <input class="rf-other" id="rfHeardOther" type="text" placeholder="Tell us where" aria-label="Where did you hear about us?" hidden>
+          </div>
+          <div class="rf-field">
+            <label for="rfComments">Comments or questions</label>
+            <textarea id="rfComments" name="{{ r.fields.comments }}" rows="4"></textarea>
+          </div>
+        </fieldset>
+
+        <p class="rf-error" id="rfError" role="alert" hidden></p>
+        <div class="rf-actions">
+          <button class="btn btn-pink" type="submit">Submit Registration <span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+
+      <div class="rf-done" id="rfDone" hidden tabindex="-1">
+        <div class="rf-check" aria-hidden="true">✓</div>
+        <h3>You're <span class="brush">in!</span></h3>
+        <p>Thanks for registering. A coach will follow up by email with tryout details.</p>
+        <button class="btn btn-ghost btn-sm" type="button" id="rfAgain">Register another player</button>
+      </div>
+    </div></div>
+    <div class="form-help cham">
+      <div class="fh-ico" aria-hidden="true">?</div>
+      <div class="fh-txt">
+        <b>Having trouble with the form?</b>
+        <span>Use our Google Form instead, or email <a href="mailto:{{ t.email }}">{{ t.email }}</a> and a coach will help you register.</span>
+      </div>
+      <div class="fh-actions">
+        <a class="btn btn-ghost btn-sm" href="{{ gform }}/viewform" target="_blank" rel="noopener">Open Google Form</a>
+        <a class="btn btn-ghost btn-sm" href="mailto:{{ t.email }}">Email Us</a>
+      </div>
+    </div>
+    <script src="/js/register.js" defer></script>
+  </div>
+</section>
+
+<section class="band" id="join">
+  <div class="halftone"></div>
+  <div class="wrap in">
+    <h2>Questions?</h2>
+    <p>If you have any questions about registration or the program, reach out — we look forward to welcoming you to the Hustle Baseball family.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a class="btn btn-dark" href="mailto:info@hustlebaseballgilroy.org">info@hustlebaseballgilroy.org</a>
+      <a class="btn btn-ghost" style="box-shadow:inset 0 0 0 2px #fff" href="/#faq">Read the FAQ</a>
+    </div>
+  </div>
+</section>

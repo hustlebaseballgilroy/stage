@@ -1,0 +1,121 @@
+---
+layout: default
+title: Baseball Schedule - Hustle Baseball Gilroy | Travel Baseball Games & Tournaments
+keywords: "baseball schedule, gilroy baseball schedule, travel baseball games, baseball tournaments, youth baseball schedule, gilroy travel baseball, baseball practices, game times"
+og_title: "Baseball Schedule - Hustle Baseball Gilroy"
+description: "View Hustle Baseball's current schedule of games, practices, and tournaments. Stay updated on our Gilroy travel baseball team's upcoming events and game times."
+---
+<section class="page-hero">
+  <div class="streak a"></div><div class="streak b"></div><div class="dots"></div>
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Home</a> / Schedule</p>
+    <h1>Team <span class="brush">Schedule</span></h1>
+    <p class="lede">Games, practices and tournaments for both teams, kept in sync with GameChanger. Tap any event for details, or subscribe so it shows up in your phone's calendar.</p>
+  </div>
+</section>
+
+<section class="band" style="padding-top:clamp(34px,5vw,56px)">
+  <div class="wrap">
+    <div class="sched-bar">
+      <div class="seg" role="group" aria-label="Filter by team">
+        <button type="button" data-team="all" aria-pressed="true">All Teams</button>
+        <button type="button" data-team="11u" aria-pressed="false">11U</button>
+        <button type="button" data-team="12u" aria-pressed="false">12U</button>
+      </div>
+      <div class="legend"><span><i style="background:var(--blue)"></i>11U</span><span><i style="background:var(--pink)"></i>12U</span></div>
+    </div>
+    <div class="cal-shell cham"><div id="calendar"></div></div>
+    <div class="cal-empty" id="calEmpty">Nothing is on the calendar for this view yet. New games and practices show up here automatically once they're added in GameChanger — check back soon, or see <a class="link" href="/#news">Latest News</a>.</div>
+
+    <div class="card cham" style="margin-top:26px">
+      <h3>Add the schedule to your phone</h3>
+      <p style="color:var(--mist);margin:0">Subscribe once and new games appear in your calendar app automatically.</p>
+      <div class="sub-links">
+        <a class="btn btn-ghost btn-sm" data-sub="hustle-10u.ics" href="/hustle-10u.ics">Subscribe · 11U</a>
+        <a class="btn btn-ghost btn-sm" data-sub="hustle-11u.ics" href="/hustle-11u.ics">Subscribe · 12U</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ev-pop" id="evPop" role="dialog" aria-modal="true" aria-labelledby="evTitle">
+  <div class="box cham"><div class="cham">
+    <button class="x" type="button" aria-label="Close">&times;</button>
+    <h3 id="evTitle"></h3>
+    <p><span class="lbl">When</span><span id="evWhen"></span></p>
+    <p><span class="lbl">Where</span><span id="evWhere"></span></p>
+    <p id="evDescWrap"><span class="lbl">Details</span><span id="evDesc"></span></p>
+  </div></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/ical.js@1.5.0/build/ical.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.15/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@6.1.15/index.global.min.js"></script>
+<script>
+(function () {
+  // The GameChanger feeds still use last season's file names: the team that was
+  // 10U is now 11U, and the team that was 11U is now 12U.
+  var FEEDS = {
+    '11u': { url: '/hustle-10u.ics', color: '#2b9bf5' },
+    '12u': { url: '/hustle-11u.ics', color: '#ff1478' }
+  };
+  var el = document.getElementById('calendar'), empty = document.getElementById('calEmpty');
+  var narrow = window.matchMedia('(max-width: 640px)').matches;
+
+  // webcal:// links open the "subscribe" prompt in phone calendar apps.
+  document.querySelectorAll('[data-sub]').forEach(function (a) {
+    a.href = 'webcal://' + location.host + '/' + a.getAttribute('data-sub');
+  });
+
+  function sources(team) {
+    return Object.keys(FEEDS).filter(function (k) { return team === 'all' || k === team; })
+      .map(function (k) { return { id: k, url: FEEDS[k].url, format: 'ics', color: FEEDS[k].color }; });
+  }
+
+  var cal = new FullCalendar.Calendar(el, {
+    initialView: narrow ? 'listMonth' : 'dayGridMonth',
+    headerToolbar: narrow
+      ? { left: 'prev,next', center: 'title', right: 'today' }
+      : { left: 'prev,next today', center: 'title', right: 'dayGridMonth,timeGridWeek,listMonth' },
+    buttonText: { today: 'Today', month: 'Month', week: 'Week', list: 'List' },
+    height: 'auto',
+    eventTimeFormat: { hour: 'numeric', minute: '2-digit', meridiem: 'short' },
+    displayEventEnd: true,
+    noEventsText: 'No events this month',
+    eventSources: sources('all'),
+    eventsSet: function (evs) { empty.classList.toggle('show', evs.length === 0); },
+    eventSourceFailure: function () { empty.textContent = 'The schedule could not be loaded right now. Please try again later.'; empty.classList.add('show'); },
+    eventClick: function (info) {
+      info.jsEvent.preventDefault();
+      var e = info.event, opts = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+      var when = e.start.toLocaleDateString('en-US', opts);
+      if (!e.allDay) {
+        var tf = { hour: 'numeric', minute: '2-digit' };
+        when += ' · ' + e.start.toLocaleTimeString('en-US', tf) + (e.end ? ' – ' + e.end.toLocaleTimeString('en-US', tf) : '');
+      }
+      document.getElementById('evTitle').textContent = e.title;
+      document.getElementById('evWhen').textContent = when;
+      document.getElementById('evWhere').textContent = e.extendedProps.location || 'Location to be announced';
+      var desc = e.extendedProps.description || '';
+      document.getElementById('evDesc').textContent = desc;
+      document.getElementById('evDescWrap').hidden = !desc;
+      pop.classList.add('show');
+      pop.querySelector('.x').focus();
+    }
+  });
+  cal.render();
+
+  document.querySelectorAll('.seg button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.seg button').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+      cal.getEventSources().forEach(function (s) { s.remove(); });
+      sources(b.getAttribute('data-team')).forEach(function (s) { cal.addEventSource(s); });
+    });
+  });
+
+  var pop = document.getElementById('evPop');
+  var closePop = function () { pop.classList.remove('show'); };
+  pop.addEventListener('click', function (e) { if (e.target === pop || e.target.closest('.x')) closePop(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePop(); });
+})();
+</script>

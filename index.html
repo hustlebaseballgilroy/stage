@@ -1,0 +1,222 @@
+---
+layout: default
+title: Hustle Baseball - Gilroy Travel Baseball Team | Youth Baseball in Gilroy, CA
+keywords: "travel baseball, gilroy baseball, gilroy little league, youth baseball gilroy, travel baseball team, baseball tournaments, gilroy ca baseball, competitive youth baseball, baseball tryouts gilroy, travel baseball organization"
+og_title: "Hustle Baseball - Gilroy Travel Baseball Team"
+description: "Hustle Baseball is a competitive youth travel baseball organization in Gilroy, California. Join our travel baseball team for skill development, tournaments, and character building. Established 2024."
+head_extra: |
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": "Hustle Baseball",
+    "description": "Competitive youth travel baseball organization in Gilroy, California",
+    "url": "https://hustlebaseballgilroy.org",
+    "logo": "https://hustlebaseballgilroy.org/logo3.png",
+    "foundingDate": "2024",
+    "nonprofitStatus": "Nonprofit501c3",
+    "taxID": "30-1433334",
+    "email": "info@hustlebaseballgilroy.org",
+    "address": {"@type": "PostalAddress", "addressLocality": "Gilroy", "addressRegion": "CA", "addressCountry": "US"},
+    "sport": "Baseball",
+    "areaServed": {"@type": "City", "name": "Gilroy"}
+  }
+  </script>
+---
+{%- assign t = site.data.tryouts -%}
+<!-- hero -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <div class="streak a"></div><div class="streak b"></div><div class="streak c"></div>
+    <div class="dots"></div><div class="dots2"></div>
+  </div>
+  <div class="hero-inner">
+    <div>
+      <p class="eyebrow" style="color:var(--pink)">Gilroy, California · Travel Baseball</p>
+      <h1><span class="l1">Hustle</span> <span class="l2">Baseball</span></h1>
+      <span class="kicker">play hard. hustle harder.</span>
+      <p class="sub">Competitive youth travel baseball built on fundamentals, sportsmanship, and relentless hustle — on the field and off it.</p>
+      <div class="cta-row">
+        <a class="btn btn-pink" href="/signup.html">Join Hustle
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#teams">Our Teams</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <img src="/images/redesign/mascot.png" alt="Hustle Baseball mascot — player at bat" width="920" height="748">
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stats-in">
+      <div class="stat"><b>2</b><span>Travel Teams</span></div>
+      <div class="stat"><b>{{ t.divisions | join: "/" }}</b><span>{{ t.season | split: " " | last }} Divisions</span></div>
+      <div class="stat"><b>2024</b><span>Established</span></div>
+      <div class="stat"><b>501(c)(3)</b><span>Nonprofit</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- news / announcements (rendered from announcements.md) -->
+<section class="band" id="news">
+  <div class="wrap">
+    <div class="news-head">
+      <div class="sec-head" style="margin:0">
+        <p class="eyebrow">Announcements</p>
+        <h2 class="sec">Latest <span class="brush">News</span></h2>
+      </div>
+    </div>
+    <div id="newsRoot"><p class="news-err">Loading announcements…</p></div>
+  </div>
+</section>
+
+<!-- tryouts -->
+<section class="band" id="tryouts">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Now Recruiting</p>
+      <h2 class="sec"><span class="brush">Tryouts</span> {{ t.season }}</h2>
+    </div>
+    {% include tryouts.html %}
+  </div>
+</section>
+
+<!-- about -->
+<section class="band" id="about">
+  <div class="wrap">
+    <div class="sec-row">
+      <div class="sec-head">
+        <p class="eyebrow">Who We Are</p>
+        <h2 class="sec">More Than <span class="brush">a Team</span></h2>
+        <p class="lede" style="margin-top:16px">Established in 2024, Hustle Baseball is a competitive youth travel baseball organization based in Gilroy, California — a pathway for youth baseball development beyond traditional little league programs.</p>
+        <p class="lede" style="margin-top:12px">As Gilroy's premier travel baseball team, we give young athletes the chance to compete at a higher level while learning lessons that last — serving families in Gilroy and the surrounding areas.</p>
+      </div>
+    </div>
+    <div class="vmp">
+      <div class="vmp-card cham"><div class="inner cham">
+        <div class="num">01</div><h3>Our Vision</h3>
+        <p>To be the leading youth baseball organization that inspires excellence through sportsmanship and fosters personal and athletic growth.</p>
+      </div></div>
+      <div class="vmp-card cham"><div class="inner cham">
+        <div class="num">02</div><h3>Our Mission</h3>
+        <p>To foster a love for youth baseball by cultivating a culture of sportsmanship, relentless hustle, and personal growth — while building community among players, families, and supporters.</p>
+      </div></div>
+      <div class="vmp-card cham"><div class="inner cham">
+        <div class="num">03</div><h3>Our Purpose</h3>
+        <p>To empower young athletes through the game of baseball, teaching the values of sportsmanship, growth, and hustle while developing character and a lifelong passion for the sport.</p>
+      </div></div>
+    </div>
+    <a class="more-link" href="/about.html">More about Hustle →</a>
+  </div>
+</section>
+
+<!-- teams -->
+<section class="band" id="teams">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Programs</p>
+      <h2 class="sec">Our <span class="brush">Teams</span></h2>
+    </div>
+    <div class="team-grid">
+      <div class="team a cham">
+        <img src="/photos/10U/DSC_0804.JPG" alt="Hustle Baseball player in the field" loading="lazy">
+        <div class="tint"></div>
+        <div class="body">
+          <span class="tag">Ages 10–11</span>
+          <h3>11U</h3>
+          <p>Emphasizes fundamentals, teamwork, and enjoyment while introducing players to travel baseball and promoting sportsmanship.</p>
+          <div class="roster"><span>Nic Amanno</span><span>Dan Stilts</span><span>Brandon Einhorn</span></div>
+        </div>
+      </div>
+      <div class="team b cham">
+        <img src="/photos/10U/DSC_0001.webp" alt="Hustle Baseball catcher behind the plate" loading="lazy">
+        <div class="tint"></div>
+        <div class="body">
+          <span class="tag">Ages 11–12</span>
+          <h3>12U</h3>
+          <p>Develops advanced skills, leadership, and competitive spirit through local tournament competition — preparing players for higher levels of play.</p>
+          <div class="roster"><span>Mike Harris</span><span>Scott De Lara</span></div>
+        </div>
+      </div>
+    </div>
+    <a class="more-link" href="/about.html#coaches">Meet the coaches →</a>
+  </div>
+</section>
+
+<!-- sponsors -->
+<section class="band" id="sponsors">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Thank You</p>
+      <h2 class="sec">Our <span class="brush">Sponsors</span></h2>
+    </div>
+    <div class="sp-grid">
+      <a class="sp cham" href="https://www.antrimdds.com/" target="_blank" rel="noopener"><img src="/images/sponsors/drantrim.webp" alt="" loading="lazy"><b>Kinberly Antrim, DDS</b></a>
+      <a class="sp cham" href="https://bhandalbros.com/" target="_blank" rel="noopener"><img src="/images/sponsors/bhandal.webp" alt="" loading="lazy"><b>Bhandal Bros Inc.</b></a>
+      <a class="sp cham" href="https://www.capitolhonda.com/" target="_blank" rel="noopener"><img src="/images/sponsors/capitol-honda.webp" alt="" loading="lazy"><b>Capitol Honda</b></a>
+      <a class="sp cham" href="https://primeairco.com/" target="_blank" rel="noopener"><img src="/images/sponsors/prime-air.webp" alt="" loading="lazy"><b>Prime Air</b></a>
+      <a class="sp cham" href="https://fcma.biz/" target="_blank" rel="noopener"><img src="/images/sponsors/full-circle.webp" alt="" loading="lazy"><b>Full Circle Martial Arts</b></a>
+      <a class="sp cham join" href="/sponsors.html#become"><b>Become a Sponsor</b><span>Support local youth baseball</span></a>
+    </div>
+    <a class="more-link" href="/sponsors.html">All sponsors &amp; levels →</a>
+  </div>
+</section>
+
+<!-- gallery -->
+<section class="band" id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">On the Field</p>
+      <h2 class="sec">Photo <span class="brush">Gallery</span></h2>
+    </div>
+    <div class="gal">
+      <a class="cham" href="/gallery.html"><img src="/photos/11U/DSC_0415.webp" alt="Players at the plate" loading="lazy"></a>
+      <a class="cham" href="/gallery.html"><img src="/photos/10U/DSC_0656.webp" alt="Outfielder chasing a ball" loading="lazy"></a>
+      <a class="cham" href="/gallery.html"><img src="/photos/10U/DSC_0001.webp" alt="Catcher at home plate" loading="lazy"></a>
+      <a class="cham" href="/gallery.html"><img src="/photos/10U/DSC_0804.JPG" alt="Infielder ready" loading="lazy"></a>
+      <a class="cham" href="/gallery.html"><img src="/photos/10U/DSC_0676.JPG" alt="Game action" loading="lazy"></a>
+      <a class="cham" href="/gallery.html"><img src="/photos/10U/DSC_0128.webp" alt="Game action" loading="lazy"></a>
+      <a class="cham" href="/gallery.html"><img src="/photos/SJGiants/DSC_0217.webp" alt="Game action" loading="lazy"></a>
+      <a class="cham" href="/gallery.html"><img src="/photos/SJGiants/DSC_0207.webp" alt="Game action" loading="lazy"></a>
+    </div>
+    <a class="more-link" href="/gallery.html">View the full gallery →</a>
+  </div>
+</section>
+
+<!-- faq -->
+<section class="band" id="faq">
+  <div class="wrap faq-grid">
+    <div class="sec-head" style="margin:0">
+      <p class="eyebrow">For Parents</p>
+      <h2 class="sec">Got <span class="brush">Questions?</span></h2>
+      <p class="lede" style="margin-top:16px">The things families ask us most. Don't see yours? Email <a href="mailto:info@hustlebaseballgilroy.org" class="link">info@hustlebaseballgilroy.org</a>.</p>
+    </div>
+    <div class="faq-list">
+      <details class="cham" open><summary>How do I register for tryouts?</summary><p>Registration is required. Fill out the <a href="/signup.html#register">online registration form</a>, or email <a href="mailto:{{ t.email }}">{{ t.email }}</a> with your child's name and the age level they're trying out for.</p></details>
+      <details class="cham"><summary>Which division should my child try out for?</summary><p>{% for c in t.cutoffs %}{{ c.division }} is for players born on or after {{ c.label }}. {% endfor %}The division checker in the tryouts section will tell you instantly.</p></details>
+      <details class="cham"><summary>What does my player need to bring?</summary><p>Required gear: {{ t.equipment | join: ", " | downcase }}.</p></details>
+      <details class="cham"><summary>Where are tryouts held?</summary><p>{% if t.venue %}{{ t.venue }}, {{ t.address }}. Check <a href="#news">Latest News</a> for upcoming dates.{% else %}The {{ t.season }} tryout location will be announced with the dates. Check <a href="#news">Latest News</a>, or <a href="/signup.html#register">register</a> and we'll email you the details.{% endif %}</p></details>
+      <details class="cham"><summary>How is travel ball different from little league?</summary><p>Hustle teams compete in local tournaments close to home, so there's no long-distance travel. The program is a development pathway beyond traditional little league, built around fundamentals, sportsmanship, and hustle.</p></details>
+      <details class="cham"><summary>Where do the teams play tournaments?</summary><p>We play local tournaments run by CCYB, USSSA and NCTB, at venues like Manzanita Fields in Prunedale, Big League Dreams in Manteca and Twin Creeks in Sunnyvale. See <a href="/tournament-sites.html">Tournament Sites</a> for addresses and tips.</p></details>
+      <details class="cham"><summary>How do families keep up with the schedule?</summary><p>Games, practices and tournaments are kept in GameChanger and show up on our <a href="/schedule.html">Schedule</a> page. You can also subscribe to your team's calendar so new events appear on your phone automatically.</p></details>
+      <details class="cham"><summary>Are donations or player fees tax-deductible?</summary><p>Hustle Baseball is a 501(c)(3) nonprofit (Tax ID 30-1433334), so donations may be tax-deductible. Player and registration fees generally are not, because they pay for your own player's participation. Volunteers may be able to deduct out-of-pocket costs such as mileage. Please check with your tax advisor.</p></details>
+      <details class="cham"><summary>How can my business sponsor the team?</summary><p>Sponsorships help cover uniforms, tournament fees, and equipment. See the <a href="/sponsors.html#become">sponsorship levels</a> or email <a href="mailto:info@hustlebaseballgilroy.org">info@hustlebaseballgilroy.org</a>.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- final cta -->
+<section class="band" id="join">
+  <div class="halftone"></div>
+  <div class="wrap in">
+    <h2>Ready to <span style="font-family:'Kaushan Script',cursive;text-transform:none">hustle?</span></h2>
+    <p>We're building {{ t.divisions | join: " and " }} rosters of players who love the game. Register your interest and our coaching staff will follow up with next steps.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a class="btn btn-dark" href="/signup.html">Register Online</a>
+      <a class="btn btn-ghost" style="box-shadow:inset 0 0 0 2px #fff" href="/contact.html">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="/js/news.js"></script>

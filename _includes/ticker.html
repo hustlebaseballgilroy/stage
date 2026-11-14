@@ -1,0 +1,10 @@
+{%- assign t = site.data.tryouts -%}
+{%- capture items -%}
+{% if t.date %}<span class="only-upcoming">{{ t.season }} Tryouts</span><span class="only-upcoming">{{ t.date | date: "%B %-d" }} · {{ t.time_label }}</span><span>{{ t.divisions | join: " &amp; " }}</span><span class="only-upcoming">{{ t.venue | replace: " Softball Field", "" }}, {{ t.address | split: ", " | slice: 1 }}</span><span class="past-only">Registration open for next season</span>{% else %}<span>{{ t.season }} registration open</span><span>{{ t.divisions | join: " &amp; " }}</span><span>Tryout dates coming soon</span>{% endif %}<span>Est. 2024 · Gilroy, CA</span><span>Play hard · Hustle harder</span>
+{%- endcapture -%}
+<div class="ticker" data-tryout-date="{{ t.date }}" aria-hidden="true">
+  <div class="ticker-track">
+    {{ items }}
+    {{ items }}
+  </div>
+</div>

@@ -1,0 +1,10 @@
+# Jekyll settings for hustlebaseballgilroy.org (built by GitHub Pages).
+# Pages use _layouts/default.html, which pulls in the shared header,
+# footer and tryout details from _includes/ and _data/.
+title: Hustle Baseball
+url: https://stage.hustlebaseballgilroy.org
+
+exclude:
+  - README.md
+  - scripts
+  - "*.xcf"

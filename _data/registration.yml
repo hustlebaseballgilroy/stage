@@ -1,0 +1,29 @@
+# Registration form on signup.html (#register).
+#
+# The form on the site is our own HTML, but it submits to a Google Form so
+# responses land in that form's response sheet. The field ids below come from
+# the Google Form. IMPORTANT: if you add, remove or change a question in the
+# Google Form, the site's form must be updated to match, or that answer is lost.
+#
+# To find the ids for a new form: open the form's /viewform URL, view page
+# source, and search for FB_PUBLIC_LOAD_DATA_ (or ask Claude to read it).
+season: Spring 2027
+form_id: 1FAIpQLSeNsy_wL1GD3pIyEMRSPKaHUCRESq0WTiqqhn68HIWFuPMqUQ
+fields:
+  parent: entry.1498135098       # Parent/Guardian Name (required)
+  phone: entry.1994045659        # Phone Number
+  player: entry.1209345135       # Player Name (required)
+  dob: entry.154282190           # Players Date of Birth (required; sent as _year/_month/_day)
+  division: entry.877086558      # Age range trying out for (required): 11u / 12u
+  pos_primary: entry.914311214   # Positions grid, "Primary" row (required)
+  pos_secondary: entry.617798694 # Positions grid, "Seconday" row (required)
+  heard: entry.1424661284        # How did you hear about this event? (has "Other")
+  comments: entry.2606285        # Comments and/or questions?
+positions: [P, C, 1B, 2B, 3B, SS, LF, CF, RF]
+divisions: [11u, 12u]
+heard_options:
+  - Existing/Past Hustle Player
+  - Website
+  - Friend
+  - Flyer
+  - Google

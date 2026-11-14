@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{%- assign path = page.url | replace: 'index.html', '' -%}
+{%- assign canonical = site.url | append: path -%}
+{%- assign desc = page.description | default: "Hustle Baseball is a competitive youth travel baseball organization in Gilroy, California, offering 11U and 12U teams focused on fundamentals, sportsmanship and hustle." -%}
+<title>{{ page.title }}</title>
+<meta name="description" content="{{ desc }}">
+{%- if page.keywords %}
+<meta name="keywords" content="{{ page.keywords }}">
+{%- endif %}
+<meta name="author" content="Hustle Baseball">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#07080b">
+<link rel="canonical" href="{{ canonical }}">
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hustle Baseball">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:title" content="{{ page.og_title | default: page.title }}">
+<meta property="og:description" content="{{ desc }}">
+<meta property="og:image" content="{{ site.url }}/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hustle Baseball, youth travel baseball in Gilroy, California">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page.og_title | default: page.title }}">
+<meta name="twitter:description" content="{{ desc }}">
+<meta name="twitter:image" content="{{ site.url }}/images/og-image.jpg">
+
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Kaushan+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/hustle.css">
+
+<!-- Google tag (gtag.js): Analytics + Ads -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EK72WWNR3Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EK72WWNR3Z');
+  gtag('config', 'AW-17128081732');
+</script>
+{%- unless page.head_extra contains 'ld+json' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportsOrganization",
+  "name": "Hustle Baseball",
+  "description": "Competitive youth travel baseball organization in Gilroy, California",
+  "url": "{{ canonical }}",
+  "logo": "{{ site.url }}/logo3.png",
+  "foundingDate": "2024",
+  "address": {"@type": "PostalAddress", "addressLocality": "Gilroy", "addressRegion": "CA", "addressCountry": "US"},
+  "sport": "Baseball",
+  "areaServed": {"@type": "City", "name": "Gilroy"}
+}
+</script>
+{%- endunless %}
+{{ page.head_extra }}
+{%- if page.url == '/' or page.url == '/index.html' or page.url == '/signup.html' %}
+{% include tryout-event-ld.html %}
+{%- endif %}
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+{% include ticker.html %}
+{% include header.html %}
+
+<main id="main">
+{{ content }}
+</main>
+
+{% include footer.html %}
+
+<script src="/js/site.js"></script>
+</body>
+</html>
